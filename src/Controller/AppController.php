@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\DistrictRepository;
+use App\Repository\RestaurantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,6 +29,20 @@ class AppController extends AbstractController
 
         return $this->render('app/district.html.twig', [
             'district' => $district,
+        ]);
+    }
+
+    #[Route('/restaurant/{id}', name: 'app_restaurant')]
+    public function restaurant($id, RestaurantRepository $restaurantRepository): Response
+    {
+        $restaurant = $restaurantRepository->find($id);
+
+        if (!$restaurant) {
+            throw $this->createNotFoundException('Restaurant not found');
+        }
+
+        return $this->render('app/restaurant.html.twig', [
+            'restaurant' => $restaurant,
         ]);
     }
 }

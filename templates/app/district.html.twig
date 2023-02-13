@@ -13,7 +13,11 @@
     <a href="{{ path('app_index') }}">Back to districts</a>
     <ul>
         {% for restaurant in district.restaurants %}
-            <li>{{ restaurant.name }}</li>
+            <li>
+                <a href="{{ path('app_restaurant', {'id': restaurant.id}) }}">
+                    {{ restaurant.name }}
+                </a>
+            </li>
         {% endfor %}
     </ul>
 </div>
